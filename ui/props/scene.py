@@ -203,6 +203,9 @@ class AudvisSceneProperties(bpy.types.PropertyGroup):
     example_driver_roty: bpy.props.BoolProperty(name="Animate Rotation Y", default=False)
     example_driver_rotz: bpy.props.BoolProperty(name="Animate Rotation Z", default=False)
 
+    example_driver_custom: bpy.props.BoolProperty(name="Custom Property", default=False)
+    example_driver_custom_name: bpy.props.StringProperty(name="Custom Property Name", default="audvis")
+
     example_material: bpy.props.EnumProperty(name="Material Color", default="None", items=[
         ("None", "Nope", "Nope"),
         ("One", "One for All", "One material for all objects"),

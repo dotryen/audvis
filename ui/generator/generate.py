@@ -343,6 +343,11 @@ class Generator:
             d = obj.driver_add("rotation_euler", 2)
             d.driver.expression = expr + (" + %f" % (obj.rotation_euler[2]))
 
+        if self.conf.example_driver_custom:
+            obj[self.conf.example_driver_custom_name] = 0 # create custom proprety
+            d = obj.driver_add('["%s"]' % self.conf.example_driver_custom_name)
+            d.driver.expression = build_expression(freq_from, freq_to, self.conf)
+
     def make_lattice(self):
         lattice = bpy.data.lattices.new("AudVisExampleLattice")
         lattice.points_u = 5

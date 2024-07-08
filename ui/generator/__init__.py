@@ -118,6 +118,10 @@ class AUDVIS_PT_GeneratorNpanel(AudVisButtonsPanel_Npanel):
         row.prop(scene.audvis, "example_driver_roty", text="Y")
         row.prop(scene.audvis, "example_driver_rotz", text="Z")
 
+        col.prop(scene.audvis, "example_driver_custom")
+        if scene.audvis.example_driver_custom:
+            col.prop(scene.audvis, "example_driver_custom_name", text="Name")
+
         box = layout.box()
         col = box.column(align=True)
         col.label(text="Sound:")
