@@ -179,9 +179,18 @@ class Generator:
                             self.conf.example_note_a4_freq)
                         freq_from = round(freq_from * 100) / 100
                         freq_to = round(freq_to * 100) / 100
-                    else:
+                    elif self.conf.example_freq_seq_type == "classic":
                         freq_from = index * freq_step + freqstart
                         freq_to = freq_from + rangeperobject
+                    elif self.conf.example_freq_seq_type == "curve":
+                        freqRange = self.conf.example_curve_freq_max - self.conf.example_curve_freq_min
+
+                        fromFactor = index / total_num
+                        toFactor = (index + 1) / total_num
+
+                        freq_from = (pow(fromFactor, self.conf.example_curve_power) * freqRange) + self.conf.example_curve_freq_min
+                        freq_to = (pow(toFactor, self.conf.example_curve_power) * freqRange) + self.conf.example_curve_freq_min
+
                     obj = template_obj.copy()
                     for modifier in obj.modifiers:  # quickfix for bug https://developer.blender.org/T71604
                         if modifier.type == 'CLOTH':

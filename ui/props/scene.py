@@ -183,9 +183,10 @@ class AudvisSceneProperties(bpy.types.PropertyGroup):
                                                                      ' in the driver\'s expression')  # modifiers...
 
     example_freq_seq_type: bpy.props.EnumProperty(name="Freq Sequencing", items=[
-        ("classic", "Linear", "0-50 ; 50-100 ; 100-150..."),
+        ("classic", "Linear Step", "0-50 ; 50-100 ; 100-150..."),
         ("notes", "Notes", "Music notes"),
-    ])
+        ("curve", "Power Curve", 'Min to Max in an exponential curve. Higher frequencies are harder to identify so the curves seem more "accurate."'), # making this first would suggest that it is the best/default option, but that could break other's settings
+    ], default="curve")
     example_note_a4_freq: bpy.props.FloatProperty(name="A4 Note Frequency", default=440.0, soft_min=432.0,
                                                   soft_max=446.0)
     example_note_step: bpy.props.FloatProperty(name="Note Step", default=1, step=50)
@@ -249,6 +250,9 @@ class AudvisSceneProperties(bpy.types.PropertyGroup):
                                                description="If set to 5, objects will use"
                                                            " frequencies 0-50, 5-55, 10-60...")
     example_freqstart: bpy.props.FloatProperty(name="Frequency Start", default=0, min=0)
+    example_curve_freq_min: bpy.props.FloatProperty(name="Min Frequency", default=20, min=20, max=20000, step=1000)
+    example_curve_freq_max: bpy.props.FloatProperty(name="Max Frequency", default=10000, min=20, max=20000, step=1000)
+    example_curve_power: bpy.props.FloatProperty(name="Curve Power", default=2, min=0.001, max=100, soft_max=5)
     example_objectsize_type: bpy.props.EnumProperty(name="Object Size Calculation", items=[
         ("relative", "Relative", "Calculated from X/Y/Z Count and from Collection Size"),
         ("fixed", "Fixed", ""),

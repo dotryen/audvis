@@ -65,6 +65,10 @@ class AUDVIS_PT_GeneratorNpanel(AudVisButtonsPanel_Npanel):
             col.prop(scene.audvis, "example_note_a4_freq")
             col.prop(scene.audvis, "example_note_step")
             col.prop(scene.audvis, "example_note_offset")
+        elif scene.audvis.example_freq_seq_type == "curve":
+            col.prop(scene.audvis, "example_curve_freq_min")
+            col.prop(scene.audvis, "example_curve_freq_max")
+            col.prop(scene.audvis, "example_curve_power")
 
         obj_count = (scene.audvis.example_xcount * scene.audvis.example_ycount * scene.audvis.example_zcount)
         step = scene.audvis.example_freq_step
@@ -73,11 +77,14 @@ class AUDVIS_PT_GeneratorNpanel(AudVisButtonsPanel_Npanel):
         if scene.audvis.example_freq_seq_type == 'notes':
             whole_range_text = notes_label(obj_count, scene.audvis.example_note_step, scene.audvis.example_note_a4_freq,
                                            scene.audvis.example_note_offset)
-        else:
+        elif scene.audvis.example_freq_seq_type == "classic":
             whole_range_text = hz_label(start=scene.audvis.example_freqstart,
                                         range_per_point=scene.audvis.example_rangeperobject,
                                         step=step,
                                         points_count=obj_count)
+        elif scene.audvis.example_freq_seq_type == "curve":
+            whole_range_text = "{:,.2f} - {:,.2f} Hz".format(scene.audvis.example_curve_freq_min, scene.audvis.example_curve_freq_max)
+
         col.label(text=whole_range_text)
 
         box = layout.box()
